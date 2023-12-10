@@ -55,3 +55,33 @@ insert ignore into mydb.matches (name, tourId, format, startTime, endTime) value
 insert ignore into mydb.matches (name, tourId, format, startTime, endTime) values ('IND vs WI', 3, 'ODI', '2023-06-12 10:00:00', '2023-06-12 23:00:00');
 insert ignore into mydb.matches (name, tourId, format, startTime, endTime) values ('IND vs WI', 3, 'ODI', '2023-06-14 10:00:00', '2023-06-14 23:00:00');
 insert ignore into mydb.matches (name, tourId, format, startTime, endTime) values ('KER vs JFC', 4, 'soccer', '2022-04-09 18:00:00', '2022-04-09 23:00:00');
+
+-- migration 2
+CREATE INDEX tours_name_IDX USING HASH ON mydb.tours (name);
+
+create table if not exists mydb.matches_news
+(
+    id int auto_increment NOT NULL PRIMARY KEY,
+	title varchar(100) NOT NULL,
+	description TEXT NOT NULL,
+	matchId int NOT NULL,
+    recUpdatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    foreign key (matchId) references matches(id)
+);
+
+create table if not exists mydb.tours_news
+(
+    id int auto_increment NOT NULL PRIMARY KEY,
+	title varchar(100) NOT NULL,
+	description TEXT NOT NULL,
+	tourId int NOT NULL,
+    recUpdatedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    foreign key (tourId) references tours(id)
+);
+
+insert ignore into mydb.matches_news (id, title, description, matchId) values (1, 'Match 1 News 1', 'Sample Description', 1);
+insert ignore into mydb.matches_news (id, title, description, matchId) values (2, 'Match 1 News 2', 'Sample Description', 1);
+insert ignore into mydb.tours_news (id, title, description, tourId) values (1, 'Tour 1 News 1', 'Sample Description', 1);
+insert ignore into mydb.tours_news (id, title, description, tourId) values (2, 'Tour 2 News 1', 'Sample Description', 2);
