@@ -5,7 +5,7 @@ guidelines.txt has the guidelines to be followed while solving and submitting th
 problem-statement.txt has the problems statements to be solved
 ````
 
-I have tried to follow the existing code like the status codes, structure, and tests used.
+I have tried to follow the existing pattern like the status codes, structure, and tests used.
 
 # Problem 1
 
