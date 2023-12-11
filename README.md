@@ -5,6 +5,15 @@ guidelines.txt has the guidelines to be followed while solving and submitting th
 problem-statement.txt has the problems statements to be solved
 ````
 
+I have tried to follow the existing code like the status codes, structure, and tests used.
+
+# Problem 1
+
+```sql
+CREATE INDEX tours_name_IDX USING HASH ON mydb.tours (name)
+SELECT m.* FROM matches m INNER JOIN tours t on m.tourId = t.id AND tours.name = ?
+```
+
 # Problem 2 - Sports Tour Match Endpoint
 
 ```http
@@ -78,7 +87,6 @@ Fetch News returns a JSON response in the following format:
 ```
 
 ## Status Codes
-
 500 is sent whenever there is an error like validation or database error. Followed the existing status code in other endpoints.
 
 | Status Code | Description |
